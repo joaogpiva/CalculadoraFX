@@ -38,21 +38,21 @@ public class CalculadoraController {
     private Soma sum = new Soma();
     private Subtracao sub = new Subtracao();
 
-    double[] tryGetInputs(){
-        double res[] = new double[3];
+    Input tryGetInputs(){
+        Input res = new Input(); 
 
         try {
-            res[0] = Double.parseDouble(inputA.getText());
-            res[1] = Double.parseDouble(inputB.getText());
+            res.a = Double.parseDouble(inputA.getText());
+            res.b = Double.parseDouble(inputB.getText());
         } catch (Exception e) {
             output.setText("Entradas incorretas!");
             throw(e);
         }
 
         try {
-            res[2] = Double.parseDouble(inputAcc.getText());
+            res.precisao = Integer.parseInt(inputAcc.getText());
         } catch (Exception e) {
-            res[2] = 2;
+            res.precisao = 2;
         }
 
         return res;
@@ -60,30 +60,30 @@ public class CalculadoraController {
 
     @FXML
     void dividir(ActionEvent event) {
-        double inputs[] = tryGetInputs();
+        Input i = tryGetInputs();
 
-        output.setText(Double.toString(this.div.executar(inputs[0], inputs[1], (int)inputs[2])));
+        output.setText(Double.toString(this.div.executar(i.a, i.b, i.precisao)));
     }
 
     @FXML
     void multiplicar(ActionEvent event) {
-        double inputs[] = tryGetInputs();
+        Input i = tryGetInputs();
 
-        output.setText(Double.toString(this.mult.executar(inputs[0], inputs[1], (int)inputs[2])));
+        output.setText(Double.toString(this.mult.executar(i.a, i.b, i.precisao)));
     }
 
     @FXML
     void somar(ActionEvent event) {
-        double inputs[] = tryGetInputs();
+        Input i = tryGetInputs();
 
-        output.setText(Double.toString(this.sum.executar(inputs[0], inputs[1], (int)inputs[2])));
+        output.setText(Double.toString(this.sum.executar(i.a, i.b, i.precisao)));
     }
 
     @FXML
     void subtrair(ActionEvent event) {
-        double inputs[] = tryGetInputs();
+        Input i = tryGetInputs();
 
-        output.setText(Double.toString(this.sub.executar(inputs[0], inputs[1], (int)inputs[2])));
+        output.setText(Double.toString(this.sub.executar(i.a, i.b, i.precisao)));
     }
 
 }
